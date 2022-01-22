@@ -1,5 +1,4 @@
-## Linter GitHub Actions ##
-name: Lint Code Base
+name: Codespell
 
 # Documentation:
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions
@@ -19,8 +18,7 @@ permissions: read-all
 # Set the Job #
 jobs:
   build:
-    # Name the Job
-    name: Lint Code Base
+    name: Codespell
     # Set the agent to run on
     runs-on: ubuntu-latest
 
@@ -32,23 +30,17 @@ jobs:
         with:
           egress-policy: audit
           allowed-endpoints: 
-            api.github.com:443
             github.com:443
           
       - name: Checkout Code
-        uses: actions/checkout@629c2de402a417ea7690ca6ce3f33229e27606a5 # v2
+        uses: actions/checkout@ec3a7ce113134d7a93b817d10a8272cb61118579 # v2.4.0
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
 
       # Run Linter against code base #
-      - name: Lint Code Base
-        #uses: github/super-linter@b8641364ca9a79b3cf07f3c4c59a82709cd39094 # v4
-        uses: github/super-linter/slim@b8641364ca9a79b3cf07f3c4c59a82709cd39094 # v4
-        #uses: docker://ghcr.io/github/super-linter:slim-v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JAVASCRIPT_DEFAULT_STYLE: prettier
-
+      - name: Codespell
+        uses: codespell-project/actions-codespell@2391250ab05295bddd51e36a8c6295edb6343b0e # master
+        with:
+          check_filenames: true
+          ignore_words_file: .codespellignore
