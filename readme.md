@@ -80,7 +80,7 @@ Enter the directory and build:
     cd esxi-unlocker
     ./esxi-build.py
 
-If everything went correctly the ouput should be:
+If everything went correctly the output should be:
 
     ESXi-Build for macOS
 
