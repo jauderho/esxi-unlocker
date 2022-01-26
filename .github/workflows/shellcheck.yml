@@ -1,0 +1,32 @@
+name: shellcheck
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - sh/*
+      - .github/workflows/shellcheck.yml
+  workflow_dispatch:
+
+env:
+  SHELLCHECK_OPTS: -e SC2029 -e SC2034
+
+permissions: read-all
+
+jobs:
+  shellcheck:
+    name: Shellcheck
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@14dc64f30986eaa2ad2dddcec073f5aab18e5a24 # v1
+        with:
+          egress-policy: audit
+          
+      - name: Source checkout
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # v2.3.4 
+      
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@203a3fd018dfe73f8ae7e3aa8da2c149a5f41c33 # master
