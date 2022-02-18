@@ -15,16 +15,25 @@ on:
     - '[0-9].[0-9]+.[0-9]+'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions: read-all
+
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
+    permissions:
+      contents: write # for actions/create-release to create a release
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - name: Harden Runner
+        uses: step-security/harden-runner@bdb12b622a910dfdc99a31fdfe6f45a16bc287a4 # v1
+        with:
+          egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
+
+      - uses: actions/checkout@629c2de402a417ea7690ca6ce3f33229e27606a5 # v2
       - name: Set env
         run: echo "RELEASE_VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_ENV
 
@@ -39,7 +48,7 @@ jobs:
       # release automation.gz
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: actions/create-release@0cb9c9b65d5d1901c1f53e5e66eaf4afd303e70e # v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
@@ -47,9 +56,10 @@ jobs:
           release_name: Release ${{ env.RELEASE_VERSION }}
           draft: true
           prerelease: true
+
       - name: Upload Release Asset
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -57,9 +67,10 @@ jobs:
           asset_path: ./readme.md
           asset_name: readme.md
           asset_content_type: text/markdown 
+
       - name: Upload Release Asset2
         id: upload-release-asset2
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-release-asset@e8f9f06c4b078e705bd2ea027f0926603fc9b4d5 # v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
