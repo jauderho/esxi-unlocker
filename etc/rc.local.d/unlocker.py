@@ -294,17 +294,18 @@ def patchsmc(name, sharedobj):
 def patchvmkctl(name):
     # Patch file
     print('smcPresent Patching: ' + name)
-    f = open(name, 'r+b')
+    with open(name, 'r+b') as f:
 
-    # Read file into string variable
-    vmkctl = f.read()
-    applesmc = vmkctl.find(b'applesmc')
-    f.seek(applesmc)
-    f.write(b'vmkernel')
+        # Read file into string variable
+        vmkctl = f.read()
+        applesmc = vmkctl.find(b'applesmc')
+        f.seek(applesmc)
+        f.write(b'vmkernel')
 
-    # Tidy up
-    f.flush()
-    f.close()
+        # Tidy up
+        f.flush()
+        f.close()
+
     print('smcPresent Patched: ' + name)
 
 
