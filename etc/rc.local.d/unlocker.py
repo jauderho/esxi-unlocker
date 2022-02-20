@@ -360,8 +360,9 @@ def main():
     srclib64 = "/lib64/libvmkctl.so"
 
     # Destination files currently tmp but may use scratch
-    basefolder = "/tmp/"
-    destfolder = joinpath(basefolder, "unlocker")
+    #basefolder = "/tmp/"
+    #destfolder = joinpath(basefolder, "unlocker")
+		destfolder = "/tmp/unlocker"
     destvmx = joinpath(destfolder, "bin/vmx")
     destlib32 = joinpath(destfolder, "lib/libvmkctl.so")
     destlib64 = joinpath(destfolder, "lib64/libvmkctl.so")
