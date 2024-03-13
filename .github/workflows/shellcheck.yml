@@ -26,7 +26,7 @@ jobs:
           egress-policy: audit
           
       - name: Source checkout
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v2.3.4 
+        uses: actions/checkout@9bb56186c3b09b4f86b1c65136769dd318469633 # v2.3.4 
       
       - name: Run ShellCheck
         uses: ludeeus/action-shellcheck@00cae500b08a931fb5698e11e79bfbd38e612a38 # master
