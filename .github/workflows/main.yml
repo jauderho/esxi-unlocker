@@ -23,7 +23,7 @@ jobs:
     # The type of runner that the job will run on
     permissions:
       contents: write # for actions/create-release to create a release
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
