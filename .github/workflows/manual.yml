@@ -31,7 +31,7 @@ jobs:
         with:
           egress-policy: audit # TODO: change to 'egress-policy: block' after couple of runs
 
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v2
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v2
 
       # Runs a few command using the runners shell
       - name: Run a multi-line script
