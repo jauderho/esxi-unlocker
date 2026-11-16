@@ -362,7 +362,7 @@ def main():
     # Destination files currently tmp but may use scratch
     #basefolder = "/tmp/"
     #destfolder = joinpath(basefolder, "unlocker")
-		destfolder = "/tmp/unlocker"
+    destfolder = "/tmp/unlocker"
     destvmx = joinpath(destfolder, "bin/vmx")
     destlib32 = joinpath(destfolder, "lib/libvmkctl.so")
     destlib64 = joinpath(destfolder, "lib64/libvmkctl.so")
